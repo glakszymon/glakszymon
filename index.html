@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Szymon Glak — Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f5f3ee;
+  --bg2: #edeae3;
+  --text: #1c1b18;
+  --muted: #7a7870;
+  --border: #ccc9be;
+  --accent: #2a4a8e;
+  --accent-light: #e8edf7;
+  --red: #b03020;
+  --green: #1e6b3c;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── LAYOUT ── */
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── HEADER ── */
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 52px 0 44px;
+}
+
+.header-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: start;
+}
+
+.name-block h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 52px;
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  color: var(--text);
+}
+
+.name-block h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.tagline {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 440px;
+  line-height: 1.7;
+}
+
+.header-aside {
+  text-align: right;
+  padding-top: 4px;
+}
+
+.header-links {
+  list-style: none;
+  font-size: 13px;
+  line-height: 2;
+}
+
+.header-links a {
+  color: var(--muted);
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.header-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--green);
+  font-weight: 500;
+}
+.availability::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── NAV ── */
+.site-nav {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.site-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 0;
+}
+
+.site-nav a {
+  display: block;
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.site-nav a:hover { color: var(--text); border-color: var(--border); }
+
+/* ── SECTION ── */
+.section {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.section-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.section-count {
+  font-size: 12px;
+  color: var(--border);
+}
+
+/* ── PROJECT TABLE ── */
+.projects-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.projects-table thead tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.projects-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 0 10px 0;
+}
+
+.projects-table th:last-child { text-align: right; }
+
+.projects-table tbody tr {
+  border-bottom: 1px solid var(--bg2);
+  transition: background 0.12s;
+}
+
+.projects-table tbody tr:last-child { border-bottom: none; }
+
+.projects-table tbody tr:hover { background: var(--bg2); }
+
+.projects-table td {
+  padding: 18px 0;
+  vertical-align: top;
+}
+
+.projects-table td + td { padding-left: 20px; }
+
+/* col: number */
+.col-num {
+  width: 28px;
+  font-size: 12px;
+  color: var(--border);
+  font-style: italic;
+  padding-top: 20px !important;
+  vertical-align: top;
+}
+
+/* col: title */
+.col-title { width: 220px; }
+
+.proj-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.proj-name a {
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.proj-name a:hover { color: var(--accent); border-color: var(--accent); }
+
+.proj-year {
+  font-size: 12px;
+  color: var(--border);
+  margin-top: 3px;
+}
+
+/* col: description */
+.col-desc {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.col-desc p { margin-bottom: 10px; }
+.col-desc p:last-child { margin-bottom: 0; }
+
+/* col: tags */
+.col-tags { width: 160px; }
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag {
+  font-size: 10.5px;
+  padding: 2px 7px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.tag.lang { background: var(--accent-light); border-color: #c5d0e8; color: var(--accent); }
+
+/* col: link */
+.col-link {
+  width: 40px;
+  text-align: right;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 14px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  border-radius: 4px;
+}
+.link-arrow:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+/* project category badge */
+.proj-cat {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 2px;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.cat-web { background: #e8f5ec; color: var(--green); }
+.cat-desktop { background: var(--accent-light); color: var(--accent); }
+.cat-game { background: #f5e8e8; color: var(--red); }
+.cat-school { background: #fdf3e3; color: #8a5e10; }
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 60px;
+}
+
+.about-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.about-text p { margin-bottom: 16px; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { color: var(--text); font-weight: 500; }
+
+.about-sidebar {}
+
+.sidebar-block {
+  margin-bottom: 28px;
+}
+
+.sidebar-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.sidebar-list {
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--text);
+}
+
+/* ── CONTACT ── */
+.contact-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--bg2);
+  font-size: 14px;
+}
+.contact-row:last-child { border-bottom: none; }
+
+.contact-label { font-size: 12px; color: var(--muted); }
+
+.contact-link {
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  transition: color 0.15s, border-color 0.15s;
+}
+.contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 28px 0;
+  font-size: 12px;
+  color: var(--border);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .wrap { padding: 0 20px; }
+  .header-inner { grid-template-columns: 1fr; }
+  .header-aside { text-align: left; }
+  .name-block h1 { font-size: 36px; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .col-tags, .col-year { display: none; }
+  footer { flex-direction: column; gap: 4px; }
+  .projects-table th:nth-child(4),
+  .projects-table td:nth-child(4) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="name-block">
+      <h1>Szymon <em>Glak</em></h1>
+      <p class="tagline">Frontend developer & projektant aplikacji. Tworzę strony, narzędzia webowe i aplikacje desktopowe — od szkolnych projektów po open-source.</p>
+    </div>
+    <div class="header-aside">
+      <ul class="header-links">
+        <li><a href="https://github.com/glakszymon" target="_blank">github.com/glakszymon</a></li>
+        <li><a href="https://github.com/ProjektySzkola" target="_blank">github.com/ProjektySzkola</a></li>
+        <li><a href="https://glakszymon.github.io/" target="_blank">glakszymon.github.io</a></li>
+      </ul>
+      <div class="availability">Dostępny do współpracy</div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <ul>
+    <li><a href="#projects">Projekty</a></li>
+    <li><a href="#about">O mnie</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-header">
+    <span class="section-title">Projekty</span>
+    <span class="section-count">7 repozytoriów</span>
+  </div>
+
+  <table class="projects-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Projekt</th>
+        <th>Opis</th>
+        <th>Stack</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- 1. SLS -->
+      <tr>
+        <td class="col-num">01</td>
+        <td class="col-title">
+          <div class="proj-cat cat-web">Web App</div>
+          <div class="proj-name"><a href="https://github.com/ProjektySzkola/SLS" target="_blank">SLS</a></div>
+          <div class="proj-year">2024–2025</div>
+        </td>
+        <td class="col-desc">
+          <p>Szkolny system zarządzania — aplikacja webowa z panelem admina, protokołami i integracją z bazą danych Supabase. Projekt rozwijany w organizacji ProjektySzkola, z workflow CI/CD przez GitHub Actions.</p>
+          <p>Jeden z bardziej złożonych projektów: 63 commity, osobny moduł <code>admin_panel</code>, dokumentacja techniczna i tutorial użytkownika.</p>
+        </td>
+        <td class="col-tags">
+          <div class="tag-list">
+            <span class="tag lang">JavaScript</span>
+            <span class="tag lang">HTML</span>
+            <span class="tag lang">CSS</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">GitHub Actions</span>
+          </div>
+        </td>
+        <td class="col-link"><a href="https://github.com/ProjektySzkola/SLS" target="_blank" class="link-arrow">↗</a></td>
+      </tr>
+
+      <!-- 2. Rozgrywki Sportowe -->
+      <tr>
+        <td class="col-num">02</td>
+        <td class="col-title">
+          <div class="proj-cat cat-web">Web App</div>
+          <div class="proj-name"><a href="https://github.com/ProjektySzkola/Rozgrywki-Sportowe" target="_blank">Rozgrywki Sportowe</a></div>
+          <div class="proj-year">2024–2025</div>
+        </td>
+        <td class="col-desc">
+          <p>System do zarządzania szkolnymi rozgrywkami sportowymi. Projekt organizacji ProjektySzkola — tworzony z myślą o realnym użyciu w szkole.</p>
+        </td>
+        <td class="col-tags">
+          <div class="tag-list">
+            <span class="tag">ProjektySzkola</span>
+            <span class="tag">Szkoła</span>
+          </div>
+        </td>
+        <td class="col-link"><a href="https://github.com/ProjektySzkola/Rozgrywki-Sportowe" target="_blank" class="link-arrow">↗</a></td>
+      </tr>
+
+      <!-- 3. Stasie Radio App -->
+      <tr>
+        <td class="col-num">03</td>
+        <td class="col-title">
+          <div class="proj-cat cat-desktop">Desktop</div>
+          <div class="proj-name"><a href="https://github.com/glakszymon/stasie-radio-app" target="_blank">Stasie Radio App</a></div>
+          <div class="proj-year">2024</div>
+        </td>
+        <td class="col-desc">
+          <p>Desktopowa aplikacja do słuchania radia internetowego. Zbudowana w Vue.js z Electronem i Vite, spakowana jako natywna aplikacja na Windows, macOS i Linux.</p>
+          <p>Open-source (GPL-3.0), dwa wydania stabilne (v1.0.0, v1.1.0).</p>
+        </td>
+        <td class="col-tags">
+          <div class="tag-list">
+            <span class="tag lang">Vue.js</span>
+            <span class="tag lang">JavaScript</span>
+            <span class="tag">Electron</span>
+            <span class="tag">Vite</span>
+            <span class="tag">GPL-3.0</span>
+          </div>
+        </td>
+        <td class="col-link"><a href="https://github.com/glakszymon/stasie-radio-app" target="_blank" class="link-arrow">↗</a></td>
+      </tr>
+
+      <!-- 4. MaturaUstna -->
+      <tr>
+        <td class="col-num">04</td>
+        <td class="col-title">
+          <div class="proj-cat cat-school">Edukacja</div>
+          <div class="proj-name"><a href="https://github.com/glakszymon/MaturaUstna" target="_blank">Matura Ustna</a></div>
+          <div class="proj-year">2024</div>
+        </td>
+        <td class="col-desc">
+          <p>Narzędzie webowe do przygotowania do matury ustnej z języka polskiego. Zawiera tryb losowania pytań (<code>egzamin.html</code>), edytor notatek (<code>editor.html</code>) i zbiór materiałów. 32 commity.</p>
+        </td>
+        <td class="col-tags">
+          <div class="tag-list">
+            <span class="tag lang">HTML</span>
+            <span class="tag lang">JavaScript</span>
+            <span class="tag lang">CSS</span>
+            <span class="tag">Edukacja</span>
+          </div>
+        </td>
+        <td class="col-link"><a href="https://github.com/glakszymon/MaturaUstna" target="_blank" class="link-arrow">↗</a></td>
+      </tr>
+
+      <!-- 5. pandemiczny_w-f -->
+      <tr>
+        <td class="col-num">05</td>
+        <td class="col-title">
+          <div class="proj-cat cat-web">Web App</div>
+          <div class="proj-name"><a href="https://github.com/glakszymon/pandemiczny_w-f" target="_blank">Pandemiczny W-F</a></div>
+          <div class="proj-year">2020–2021</div>
+        </td>
+        <td class="col-desc">
+          <p>Aplikacja webowa do zdalnych lekcji wychowania fizycznego podczas pandemii. Baza ćwiczeń, kalendarz aktywności, system zapisów i losowanie ćwiczeń. Jeden z pierwszych większych projektów — 359 commitów.</p>
+          <p>GPL-3.0, bardzo aktywny development w czasie zdalnego nauczania.</p>
+        </td>
+        <td class="col-tags">
+          <div class="tag-list">
+            <span class="tag lang">HTML</span>
+            <span class="tag lang">JavaScript</span>
+            <span class="tag lang">CSS</span>
+            <span class="tag">GPL-3.0</span>
+            <span class="tag">COVID-era</span>
+          </div>
+        </td>
+        <td class="col-link"><a href="https://github.com/glakszymon/pandemiczny_w-f" target="_blank" class="link-arrow">↗</a></td>
+      </tr>
+
+      <!-- 6. EVE -->
+      <tr>
+        <td class="col-num">06</td>
+        <td class="col-title">
+          <div class="proj-cat cat-game">Game / 3D</div>
+          <div class="proj-name"><a href="https://github.com/glakszymon/EVE" target="_blank">EVE</a></div>
+          <div class="proj-year">2023</div>
+        </td>
+        <td class="col-desc">
+          <p>Projekt gry 3D w Unity. Zawiera sceny, prefaby, własne shadery (ShaderLab + HLSL) i skrypty C#. Universal Render Pipeline — projekt eksperymentalny pokazujący, że Szymon sięga też poza web.</p>
+        </td>
+        <td class="col-tags">
+          <div class="tag-list">
+            <span class="tag lang">C#</span>
+            <span class="tag lang">ShaderLab</span>
+            <span class="tag lang">HLSL</span>
+            <span class="tag">Unity</span>
+            <span class="tag">URP</span>
+          </div>
+        </td>
+        <td class="col-link"><a href="https://github.com/glakszymon/EVE" target="_blank" class="link-arrow">↗</a></td>
+      </tr>
+
+      <!-- 7. Radio -->
+      <tr>
+        <td class="col-num">07</td>
+        <td class="col-title">
+          <div class="proj-cat cat-web">Web</div>
+          <div class="proj-name"><a href="https://github.com/glakszymon/radio" target="_blank">Radio (web)</a></div>
+          <div class="proj-year">2023</div>
+        </td>
+        <td class="col-desc">
+          <p>Webowy odtwarzacz radia — prototyp i baza dla późniejszej aplikacji desktopowej Stasie Radio App. Eksperyment z HTML Audio API.</p>
+        </td>
+        <td class="col-tags">
+          <div class="tag-list">
+            <span class="tag lang">HTML</span>
+            <span class="tag lang">CSS</span>
+            <span class="tag">Audio API</span>
+          </div>
+        </td>
+        <td class="col-link"><a href="https://github.com/glakszymon/radio" target="_blank" class="link-arrow">↗</a></td>
+      </tr>
+
+    </tbody>
+  </table>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-header">
+    <span class="section-title">O mnie</span>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        Jestem <strong>Szymon Glak</strong> — developer z zamiłowaniem do tworzenia aplikacji, które rozwiązują konkretne problemy. Zaczynałem od prostych stron HTML, przez webowe narzędzia edukacyjne, aż po aplikacje desktopowe w Vue.js + Electron i projekty w Unity.
+      </p>
+      <p>
+        Moje projekty często wyrastają z realnych potrzeb: <strong>Pandemiczny W-F</strong> powstał gdy nauczyciele musieli prowadzić WF zdalnie, <strong>Matura Ustna</strong> — gdy sam szykowałem się do egzaminu, <strong>SLS</strong> i <strong>Rozgrywki Sportowe</strong> — bo szkoła potrzebowała narzędzi. To podejście sprawia, że kod ma znaczenie.
+      </p>
+      <p>
+        Działam też w organizacji <strong>ProjektySzkola</strong> — inicjatywie tworzącej oprogramowanie dla środowiska szkolnego.
+      </p>
+    </div>
+
+    <div class="about-sidebar">
+      <div class="sidebar-block">
+        <div class="sidebar-label">Stack</div>
+        <ul class="sidebar-list">
+          <li>HTML5 / CSS3</li>
+          <li>JavaScript (ES6+)</li>
+          <li>Vue.js 3</li>
+          <li>Electron + Vite</li>
+          <li>Supabase</li>
+          <li>C# / Unity</li>
+        </ul>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-label">Narzędzia</div>
+        <ul class="sidebar-list">
+          <li>Git / GitHub</li>
+          <li>GitHub Actions</li>
+          <li>GitHub Pages</li>
+        </ul>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-label">Języki</div>
+        <ul class="sidebar-list">
+          <li>Polski — natywny</li>
+          <li>Angielski — zawodowy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-header">
+    <span class="section-title">Kontakt</span>
+  </div>
+  <div class="contact-row">
+    <span class="contact-label">GitHub (osobiste)</span>
+    <a href="https://github.com/glakszymon" target="_blank" class="contact-link">github.com/glakszymon</a>
+  </div>
+  <div class="contact-row">
+    <span class="contact-label">GitHub (szkolne)</span>
+    <a href="https://github.com/ProjektySzkola" target="_blank" class="contact-link">github.com/ProjektySzkola</a>
+  </div>
+  <div class="contact-row">
+    <span class="contact-label">Strona</span>
+    <a href="https://glakszymon.github.io/" target="_blank" class="contact-link">glakszymon.github.io</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>Szymon Glak</span>
+  <span>2025</span>
+</footer>
+
+</div><!-- /wrap -->
+</body>
+</html>
